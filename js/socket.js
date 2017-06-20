@@ -1,11 +1,12 @@
 $(function () {
     var socket = io();
-    $('form').submit(function () {
-        socket.emit('chat message', $('#m').val());
-        $('#m').val('');
+    var damage = 25;
+    
+    $('form').submit( () =>{
+        socket.emit('onDamage', damage);
         return false;
     });
-    socket.on('chat message', function (msg) {
-        $('#messages').append($('<li>').text(msg));
+    socket.on('onDamage', (dmg) => {
+        console.log(100 - dmg);
     });
 });
