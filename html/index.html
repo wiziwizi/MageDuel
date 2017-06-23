@@ -2,25 +2,19 @@
 <html>
 
 <head>
-    <title>Socket.IO chat</title>
+    <title>Mage.io</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <script src="pixi.min.js"></script>
-    
-    <script type="text/javascript">
-    var type = "WebGL"
-    if(!PIXI.utils.isWebGLSupported()){
-      type = "canvas"
-    }
-    PIXI.utils.sayHello(type)
-  </script>
-    
+    <script src="tink.js"></script>
     <script src="../socket.io/socket.io.js"></script>
     <script src="socket.js"></script>
     <script src="powerSelect.js"></script>
     <script src="drawCanvas.js"></script>
+    
+    
     <ul id="messages"></ul>
     <form action="" onsubmit="return false">
         <button onclick="selectElement(0)">Fire</button>
