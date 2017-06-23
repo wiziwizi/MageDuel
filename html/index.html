@@ -18,13 +18,17 @@
   </script>
     
     <script src="../socket.io/socket.io.js"></script>
-    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-    <script type='text/javascript' src="socket.js"></script>
-    <script type='text/javascript' src="powerSelect.js"></script>
+    <script src="socket.js"></script>
+    <script src="powerSelect.js"></script>
     <script src="drawCanvas.js"></script>
     <ul id="messages"></ul>
-    <form action="">
-        <input id="m" autocomplete="off" /><button>Send</button>
+    <form action="" onsubmit="return false">
+        <button onclick="selectElement(0)">Fire</button>
+        <button onclick="selectElement(1)">Water</button>
+        <button onclick="selectElement(2)">Electicity</button>
+        <button onclick="selectElement(3)">Ground</button>
+        <button onclick="selectElement(4)">Wind</button>
+        <button onclick="selectElement(5)">Arcane</button>
     </form>
 </body>
 
