@@ -43,3 +43,9 @@ form button {
 #messages li:nth-child(odd) {
     background: #eee;
 }
+#Player2 {
+    text-align: right;
+}
+ul {
+    width: 75%;
+}

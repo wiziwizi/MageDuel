@@ -5,7 +5,8 @@ const express = require('express'),
 
 const serverPort = 3000;
 let count = 0,
-    turn = 0;
+    turn = 0,
+    current = 0;
 
 var playerInfo = {
     id: 0,
@@ -28,12 +29,21 @@ app.get('/', (req, res) => {
 
 function dmgCalc(attack, playerElement) {
 
-    if(playerElement == 4) playerElement = 0;
-    
+    if (playerElement == 4) playerElement = -1;
+
     if (attack == playerElement + 1) return 10;
-    else if (attack == playerElement) return 50;
+
+    if (playerElement == 0) playerElement = 5;
+
+    if (attack == playerElement - 1) return 50;
     else return 30;
 }
+
+function endTurn() {
+    turn++;
+    current = (turn % 2 === 0 ? 0 : 1);
+    socket.emit('displayInfo', (players, turn));
+};
 
 io.on('connection', (socket) => {
 
@@ -50,17 +60,11 @@ io.on('connection', (socket) => {
         }
     });
 
-    socket.on('endTurn', () => {
-        turn++;
-    });
-
     socket.on('attack', (currentAttack) => {
 
-        if (turn % 2 === 0) {
-            players[0].health -= dmgCalc(currentAttack, players[0].element);
-        } else {
-            players[1].health -= dmgCalc(currentAttack, players[1].element);
-        }
+        players[current].health -= dmgCalc(currentAttack, players[current].element);
+        
+        endTurn();
     });
 
     socket.on('disconnect', () => {
@@ -72,6 +76,7 @@ io.on('connection', (socket) => {
             }
         }
     });
+    socket.emit('displayInfo', players, turn);
 });
 
 http.listen(serverPort, () => {
