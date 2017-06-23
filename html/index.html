@@ -8,14 +8,42 @@
 
 <body>
     <script src="pixi.min.js"></script>
+<<<<<<< HEAD
     <script src="tink.js"></script>
+=======
+
+    <script type="text/javascript">
+        var type = "WebGL"
+        if (!PIXI.utils.isWebGLSupported()) {
+            type = "canvas"
+        }
+        PIXI.utils.sayHello(type)
+
+    </script>
+
+>>>>>>> origin/master
     <script src="../socket.io/socket.io.js"></script>
     <script src="socket.js"></script>
     <script src="powerSelect.js"></script>
     <script src="drawCanvas.js"></script>
+<<<<<<< HEAD
     
     
     <ul id="messages"></ul>
+=======
+
+    <ul>
+        <li id="Player1">
+            <p id="player1Health"></p>
+            <p id="turn"></p>
+        </li>
+        <li id="Player2">
+            <p id="player2Health"></p>
+            <p id="turn1"></p>
+        </li>
+    </ul>
+
+>>>>>>> origin/master
     <form action="" onsubmit="return false">
         <button onclick="selectElement(0)">Fire</button>
         <button onclick="selectElement(1)">Water</button>
@@ -23,6 +51,7 @@
         <button onclick="selectElement(3)">Ground</button>
         <button onclick="selectElement(4)">Wind</button>
         <button onclick="selectElement(5)">Arcane</button>
+        <button onclick="attack(3)">Attack</button>
     </form>
 </body>
 
