@@ -42,7 +42,6 @@ function dmgCalc(attack, playerElement) {
 function endTurn() {
     turn++;
     current = (turn % 2 === 0 ? 0 : 1);
-    socket.emit('displayInfo', (players, turn));
 };
 
 io.on('connection', (socket) => {
@@ -65,6 +64,7 @@ io.on('connection', (socket) => {
         players[current].health -= dmgCalc(currentAttack, players[current].element);
         
         endTurn();
+        io.sockets.emit('displayInfo', players, turn);
     });
 
     socket.on('disconnect', () => {
@@ -76,7 +76,7 @@ io.on('connection', (socket) => {
             }
         }
     });
-    socket.emit('displayInfo', players, turn);
+    io.sockets.emit('displayInfo', players, turn);
 });
 
 http.listen(serverPort, () => {
