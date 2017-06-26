@@ -44,14 +44,14 @@ function endTurn() {
     current = (turn % 2 === 0 ? 0 : 1);
 };
 
-io.on('connection', (socket) => {
+io.on('connection', socket => {
 
-    console.log(players);
     players.push(Object.assign({}, playerInfo));
     players[count].id = socket.id;
     count++;
+    console.log(players);
 
-    socket.on('powerSelect', (power) => {
+    socket.on('powerSelect', power => {
         power = Math.abs(parseInt(power));
         for (let i = 0; i < players.length; i++) {
             if (players[i].id == socket.id && power < 6) players[i].element = parseInt(power);
@@ -59,8 +59,10 @@ io.on('connection', (socket) => {
         }
     });
 
-    socket.on('attack', (currentAttack) => {
+    socket.on('attack', currentAttack => {
 
+        if (players.length < 2) return;
+        
         players[current].health -= dmgCalc(currentAttack, players[current].element);
         
         endTurn();
@@ -76,6 +78,7 @@ io.on('connection', (socket) => {
             }
         }
     });
+    if (players.length < 2) return;
     io.sockets.emit('displayInfo', players, turn);
 });
 
