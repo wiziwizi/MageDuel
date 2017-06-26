@@ -6,22 +6,16 @@ let stage = new PIXI.Container(),
             resolution: 1
         }),
     tink = new Tink(PIXI, renderer.view),
-    buttonsprite;
+    buttonTexture;
 
-PIXI.loader
-    .add("button1.png")
-    .load(setup);
+buttonTexture = PIXI.Texture.fromImage('button1.png');
 
-function setup() {
-    buttonsprite = new PIXI.Sprite(
-        PIXI.loader.resources["button1.png"].texture
-    );
-}
+let buttonImages = [buttonTexture, buttonTexture, buttonTexture];
 
-tink.makeInteractive(buttonsprite);
-//buttonsprite.press = () => console.log("Test");
+let playButton = tink.button(buttonImages, 32, 96);
+playButton.press() =>
 
-stage.addChild(buttonsprite);
+    stage.addChild(playButton);
 
 document.body.appendChild(renderer.view);
 

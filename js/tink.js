@@ -547,7 +547,7 @@ var Tink = (function () {
 
             //The `press`,`release`, `over`, `out` and `tap` methods. They're `undefined`
             //for now, but they can be defined in the game program
-            o.press = o.press;
+            o.press = o.press || undefined;
             o.release = o.release || undefined;
             o.over = o.over || undefined;
             o.out = o.out || undefined;
