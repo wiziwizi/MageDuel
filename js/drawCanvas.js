@@ -1,22 +1,27 @@
-let stage       = new PIXI.Container();
-let renderer    = PIXI.autoDetectRenderer(
-    1080,600,
-    {antialias: true, transparent: false, resolution: 1});
-let tink        = new Tink(PIXI, renderer.view);
+let stage = new PIXI.Container(),
+    renderer = PIXI.autoDetectRenderer(
+        1080, 600, {
+            antialias: true,
+            transparent: false,
+            resolution: 1
+        }),
+    tink = new Tink(PIXI, renderer.view),
+    buttonsprite;
 
+PIXI.loader
+    .add("button1.png")
+    .load(setup);
 
-let buttonImage = new PIXI.Graphics();
-buttonImage.beginFill(0x66CCFF);
-buttonImage.lineStyle(4, 0xFF3300, 1);
-buttonImage.drawRect(170, 170, 100, 50);
-buttonImage.endFill();
-tink.makeInteractive(buttonImage);
-buttonImage.press = () => 
-{
-    console.log("Test");
+function setup() {
+    buttonsprite = new PIXI.Sprite(
+        PIXI.loader.resources["button1.png"].texture
+    );
 }
 
-stage.addChild(buttonImage);
+tink.makeInteractive(buttonsprite);
+//buttonsprite.press = () => console.log("Test");
+
+stage.addChild(buttonsprite);
 
 document.body.appendChild(renderer.view);
 
@@ -25,8 +30,7 @@ renderer.backgroundColor = 0xffffff;
 
 setInterval(loop, 10);
 
-function loop()
-{
+function loop() {
     tink.update();
     renderer.render(stage);
 }
