@@ -1,10 +1,10 @@
-let stage = new PIXI.Container(),
+var scene = new PIXI.Container(),
     renderer = PIXI.autoDetectRenderer(
         1256, 600, {
             antialias: true,
             transparent: false,
             resolution: 1
-        }),
+        }),     
     tink = new Tink(PIXI, renderer.view);
 
 let buttonTexture1 = PIXI.Texture.fromImage('button1.png');
@@ -21,7 +21,7 @@ var buttons = [tink.button(buttonImages, 10, 520),
               tink.button(buttonImages, 1078, 520)];
 
 for (i = 0; i < 7; i++)
-    stage.addChild(buttons[i]);
+    scene.addChild(buttons[i]);
 
 document.body.appendChild(renderer.view);
 
@@ -32,5 +32,5 @@ setInterval(loop, 10);
 
 function loop() {
     tink.update();
-    renderer.render(stage);
+    renderer.render(scene);
 }
