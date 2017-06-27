@@ -10,7 +10,7 @@ scene.addChild(MainMenu);
 let TutScreen = new PIXI.Container();
 scene.addChild(TutScreen);
 
-let GameScene = new PIXI.Container();
+var GameScene = new PIXI.Container();
 scene.addChild(GameScene);
 
 let GameOverScreen = new PIXI.Container();
@@ -52,7 +52,7 @@ MainMenu.addChild(Explanation);
 //  Screen  //
 ////////////*/
 
-BackToMain = tink.button(backButtonImages, 528, 150);
+BackToMain = tink.button(backButtonImages, 528, 50);
 TutScreen.addChild(BackToMain);
 
 /*////////////
@@ -60,9 +60,24 @@ TutScreen.addChild(BackToMain);
 //   Bool   //
 ////////////*/
 
-StartGame.press = () => checkSceneGame = true;
-Explanation.press = () => checkTutScreen = true;
-BackToMain.press = () => checkSceneMenu = true;
+StartGame.press = () =>{
+    checkSceneMenu = false;
+    checkSceneGame = true;
+    checkSceneGameOver = false;
+    checkTutScreen = false;
+}
+Explanation.press = () =>{    
+    checkSceneMenu = false;
+    checkSceneGame = false;
+    checkSceneGameOver = false;
+    checkTutScreen = true;
+}
+BackToMain.press = () =>{ 
+    checkSceneMenu = true;
+    checkSceneGame = false;
+    checkSceneGameOver = false;
+    checkTutScreen = false;
+}
 
 /*/////////////
 //   Update  //
@@ -72,7 +87,6 @@ BackToMain.press = () => checkSceneMenu = true;
 setInterval(loop, 100);
 
 function loop() {
-    console.log(GameScene.visible, MainMenu.visible, GameOverScreen.visible, TutScreen.visible);
     
     if(checkSceneGame == true)
         {
