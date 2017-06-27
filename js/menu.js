@@ -73,28 +73,29 @@ setInterval(loop, 100);
 
 function loop() {
     console.log(GameScene.visible, MainMenu.visible, GameOverScreen.visible, TutScreen.visible);
-    if(checkSceneGame = true)
+    
+    if(checkSceneGame == true)
         {
             GameScene.visible = true;
             MainMenu.visible = false;
             GameOverScreen.visible = false;
             TutScreen.visible = false;
         }
-    else if(checkSceneMenu = true)
+    else if(checkSceneMenu == true)
         {
             MainMenu.visible = true;
             GameScene.visible = false;
             GameOverScreen.visible = false;
             TutScreen.visible = false;
         }
-    else if(checkSceneGameOver = true)
+    else if(checkSceneGameOver == true)
         {
             GameOverScreen.visible = true;
             MainMenu.visible = false;
             GameScene.visible = false;
             TutScreen.visible = false;
         }
-    else if(checkTutScreen = true)
+    else if(checkTutScreen == true)
         {
             TutScreen.visible = true;
             GameOverScreen.visible = false;
