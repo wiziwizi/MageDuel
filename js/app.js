@@ -62,9 +62,9 @@ io.on('connection', socket => {
     socket.on('attack', currentAttack => {
 
         if (players.length < 2) return;
-        
+
         players[current].health -= dmgCalc(currentAttack, players[current].element);
-        
+
         endTurn();
         io.sockets.emit('displayInfo', players, turn);
     });
@@ -77,6 +77,7 @@ io.on('connection', socket => {
                 count--;
             }
         }
+        if (players.length < 2) turn = 0;
     });
     if (players.length < 2) return;
     io.sockets.emit('displayInfo', players, turn);
