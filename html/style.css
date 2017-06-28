@@ -8,14 +8,13 @@ body {
     font: 13px Helvetica, Arial;
 }
 
-h1{
-    text-align: center;
-}
-
-canvas{
-    margin-left: 50px;
-    margin-top: 30px;
-    margin-right: 50px;
+canvas {
+    margin-top: 5px;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
 
 form {
@@ -64,9 +63,10 @@ form button {
 #Player2 {
     margin-right: -230px;
     float: right;
-    text-align: left;
+    text-align: right;
     margin-bottom: 20px;
 }
+
 ul {
     list-style: none;
     width: 80%;
