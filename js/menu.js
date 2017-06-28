@@ -16,11 +16,14 @@ scene.addChild(GameScene);
 let GameOverScreen = new PIXI.Container();
 scene.addChild(GameOverScreen);
 
-//Booleans
-let checkSceneMenu = true;
-let checkSceneGame = false;
-let checkSceneGameOver = false;
-let checkTutScreen = false;
+MainMenu.visible = true;
+MainMenu.interactive = true;
+GameScene.visible = false;
+GameScene.interactive = false;
+GameOverScreen.visible = false;
+GameOverScreen.interactive = false;
+TutScreen.visible = false;
+TutScreen.interactive = false;
 
 
 //Buttons
@@ -55,65 +58,49 @@ MainMenu.addChild(Explanation);
 BackToMain = tink.button(backButtonImages, 528, 50);
 TutScreen.addChild(BackToMain);
 
-/*////////////
-//  Update  //
-//   Bool   //
-////////////*/
-
-StartGame.press = () =>{
-    checkSceneMenu = false;
-    checkSceneGame = true;
-    checkSceneGameOver = false;
-    checkTutScreen = false;
-}
-Explanation.press = () =>{    
-    checkSceneMenu = false;
-    checkSceneGame = false;
-    checkSceneGameOver = false;
-    checkTutScreen = true;
-}
-BackToMain.press = () =>{ 
-    checkSceneMenu = true;
-    checkSceneGame = false;
-    checkSceneGameOver = false;
-    checkTutScreen = false;
-}
-
 /*/////////////
-//   Update  //
-//   Scene   //
+//  Update   //
+// Visiblity //
 /////////////*/
 
-setInterval(loop, 100);
+StartGame.press = () => {
+    GameScene.visible = true;
+    GameScene.interactive = true;
+    MainMenu.visible = false;
+    MainMenu.interactive = false;
+    GameOverScreen.visible = false;
+    GameOverScreen.interactive = false;
+    TutScreen.visible = false;
+    TutScreen.interactive = false;
+}
+Explanation.press = () => {
+    TutScreen.visible = true;
+    TutScreen.interactive = true;
+    GameOverScreen.visible = false;
+    GameOverScreen.interactive = false;
+    MainMenu.visible = false;
+    MainMenu.interactive = false;
+    GameScene.visible = false;
+    GameScene.interactive = false;
+}
+BackToMain.press = () => {
+    MainMenu.visible = true;
+    MainMenu.interactive = true;
+    GameScene.visible = false;
+    GameScene.interactive = false;
+    GameOverScreen.visible = false;
+    GameOverScreen.interactive = false;
+    TutScreen.visible = false;
+    TutScreen.interactive = false;
+}
 
-function loop() {
-    
-    if(checkSceneGame == true)
-        {
-            GameScene.visible = true;
-            MainMenu.visible = false;
-            GameOverScreen.visible = false;
-            TutScreen.visible = false;
-        }
-    else if(checkSceneMenu == true)
-        {
-            MainMenu.visible = true;
-            GameScene.visible = false;
-            GameOverScreen.visible = false;
-            TutScreen.visible = false;
-        }
-    else if(checkSceneGameOver == true)
-        {
-            GameOverScreen.visible = true;
-            MainMenu.visible = false;
-            GameScene.visible = false;
-            TutScreen.visible = false;
-        }
-    else if(checkTutScreen == true)
-        {
-            TutScreen.visible = true;
-            GameOverScreen.visible = false;
-            MainMenu.visible = false;
-            GameScene.visible = false;
-        }
+function GameOver() {
+    GameOverScreen.visible = true;
+    GameOverScreen.interactive = true;
+    GameScene.visible = false;
+    GameScene.interactive = false;
+    MainMenu.visible = false;
+    MainMenu.interactive = false;
+    TutScreen.visible = false;
+    TutScreen.interactive = false;
 }
