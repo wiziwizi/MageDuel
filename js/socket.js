@@ -15,3 +15,5 @@ socket.on('displayInfo', (players, turn) => {
     document.getElementById("player2Health").innerHTML = "Player 2 health: " + players[1].health;
     document.getElementById("turn1").innerHTML = "Turn: " + turn;
 });
+
+socket.on('gameOver', () => GameOver());

@@ -30,52 +30,56 @@ app.get('/', (req, res) => {
 function dmgCalc(attack, playerElement) {
 
     if (playerElement == 4) playerElement = -1;
-
     if (attack == playerElement + 1) return 10;
-
     if (playerElement == 0) playerElement = 5;
-
     if (attack == playerElement - 1) return 50;
     else return 30;
+}
+
+function checkPlayer(socket) {
+    for (let i = 0; i < players.length; i++) {
+        if (players[i].id == socket.id) {
+            count = i;
+            return true;
+        }
+    }
 }
 
 function endTurn() {
     turn++;
     current = (turn % 2 === 0 ? 0 : 1);
-};
+}
 
 io.on('connection', socket => {
 
     players.push(Object.assign({}, playerInfo));
-    players[count].id = socket.id;
-    count++;
+    players[players.length - 1].id = socket.id;
     console.log(players);
 
     socket.on('powerSelect', power => {
         power = Math.abs(parseInt(power));
-        for (let i = 0; i < players.length; i++) {
-            if (players[i].id == socket.id && power < 6) players[i].element = parseInt(power);
-            console.log(players);
-        }
+        if (checkPlayer(socket) && power < 6) players[count].element = parseInt(power);
+        console.log(players);
     });
 
     socket.on('attack', currentAttack => {
 
         if (players.length < 2) return;
+        if (checkPlayer(socket) && current == count) {
+            players[count].health -= dmgCalc(currentAttack, players[count].element);
+            
+            if(players[count].health <= 0) io.sockets.emit('gameOver');
+            
+            endTurn();
+            io.sockets.emit('displayInfo', players, turn);
+        }
 
-        players[current].health -= dmgCalc(currentAttack, players[current].element);
-
-        endTurn();
-        io.sockets.emit('displayInfo', players, turn);
     });
 
     socket.on('disconnect', () => {
 
-        for (let i = 0; i < players.length; i++) {
-            if (players[i].id == socket.id) {
-                players.splice(i, 1);
-                count--;
-            }
+        if (checkPlayer(socket)) {
+            players.splice(count, 1);
         }
         if (players.length < 2) turn = 0;
     });
