@@ -4,7 +4,7 @@ var scene = new PIXI.Container(),
             antialias: true,
             transparent: false,
             resolution: 1
-        }),     
+        }),
     tink = new Tink(PIXI, renderer.view);
 
 let buttonTexture1 = PIXI.Texture.fromImage('button1.png');
@@ -21,7 +21,7 @@ var buttons = [tink.button(buttonImages, 10, 520),
               tink.button(buttonImages, 1078, 520)];
 
 for (i = 0; i < 7; i++)
-    scene.addChild(buttons[i]);
+    GameScene.addChild(buttons[i]);
 
 document.body.appendChild(renderer.view);
 
