@@ -23,7 +23,7 @@ let playerTexture1 = PIXI.Texture.fromImage('junkrat.png');
 let playerTexture2 = PIXI.Texture.fromImage('cat.png');
 
 var player1 = new PIXI.Sprite(playerTexture1);
-player1.position.set(50, 200);
+player1.position.set(50, 300);
 player1.scale.set(0.4, 0.4);
 
 var player2 = new PIXI.Sprite(playerTexture2);
@@ -45,11 +45,15 @@ buttons[2].press = () => element = 2; //elecctricity
 buttons[3].press = () => element = 3; //ground
 buttons[4].press = () => element = 4; //wind
 buttons[5].press = () => //arcane
-    (prepDone ? element = 5 : console.log("wrong element"));
+    (prepDone ? element = 5 : shake());
 buttons[6].press = () => //ready
     (prepDone ? socket.emit('attack', element) : setElement());
 
 function setElement() {
     socket.emit('powerSelect', element);
     prepDone = true;
+}
+
+function shake() {
+
 }
