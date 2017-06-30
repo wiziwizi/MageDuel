@@ -73,5 +73,5 @@ function setElement() {
 }
 
 function shake() {
-
+    charm.breathe(buttons[5],3,1.2,20,true, 1);
 }

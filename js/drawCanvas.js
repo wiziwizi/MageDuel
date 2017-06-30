@@ -5,7 +5,8 @@ var scene = new PIXI.Container(),
             transparent: false,
             resolution: 1
         }),
-    tink = new Tink(PIXI, renderer.view);
+    tink = new Tink(PIXI, renderer.view),
+    charm = new Charm(PIXI);
 
 document.body.appendChild(renderer.view);
 
@@ -16,5 +17,6 @@ setInterval(loop, 10);
 
 function loop() {
     tink.update();
+    charm.update();
     renderer.render(scene);
 }
