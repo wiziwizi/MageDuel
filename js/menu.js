@@ -32,6 +32,7 @@ let backButtonImages = [backButtonTexture, backButtonTexture, backButtonTextureG
 //Images
 let backgroundTexture = PIXI.Texture.fromImage('background.png');
 let backgroundSprite = new PIXI.Sprite(backgroundTexture);
+let tutBackgroundSprite = new PIXI.Sprite(backgroundTexture);
 
 let menuBackgroundTexture = PIXI.Texture.fromImage('menubg.png');
 let menuBackgroundSprite = new PIXI.Sprite(menuBackgroundTexture);
@@ -70,6 +71,7 @@ MainMenu.addChild(Explanation);
 //  Screen  //
 ////////////*/
 
+TutScreen.addChild(tutBackgroundSprite);
 BackToMain = tink.button(backButtonImages, 528, 50);
 TutScreen.addChild(BackToMain);
 
@@ -88,42 +90,26 @@ GameScene.addChild(backgroundSprite);
 
 StartGame.press = () => {
     GameScene.visible = true;
-    GameScene.interactive = true;
     MainMenu.visible = false;
-    MainMenu.interactive = false;
     GameOverScreen.visible = false;
-    GameOverScreen.interactive = false;
     TutScreen.visible = false;
-    TutScreen.interactive = false;
 }
 Explanation.press = () => {
     TutScreen.visible = true;
-    TutScreen.interactive = true;
     GameOverScreen.visible = false;
-    GameOverScreen.interactive = false;
     MainMenu.visible = false;
-    MainMenu.interactive = false;
     GameScene.visible = false;
-    GameScene.interactive = false;
 }
 BackToMain.press = () => {
     MainMenu.visible = true;
-    MainMenu.interactive = true;
     GameScene.visible = false;
-    GameScene.interactive = false;
     GameOverScreen.visible = false;
-    GameOverScreen.interactive = false;
     TutScreen.visible = false;
-    TutScreen.interactive = false;
 }
 
 function GameOver() {
     GameOverScreen.visible = true;
-    GameOverScreen.interactive = true;
     GameScene.visible = false;
-    GameScene.interactive = false;
     MainMenu.visible = false;
-    MainMenu.interactive = false;
     TutScreen.visible = false;
-    TutScreen.interactive = false;
 }
